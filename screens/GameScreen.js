@@ -27,7 +27,7 @@ const GameScreen = props => {
   const currentLow = useRef(1);
   const currentHigh = useRef(100);
 
-  const { userChoice, nGameOver } = props;
+  const { userChoice, onGameOver } = props;
 
   useEffect(() => {
     if (currentGuess === userChoice) {
@@ -64,12 +64,12 @@ const GameScreen = props => {
     <View style={styles.screen}>
       <Text>Opponent's Guess</Text>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <View style={styles.buttonContainer}>
-        <Card>
+      <Card>
+        <View style={styles.buttonContainer}>
           <Button title='LOWER' onPress={nextGuessHandler.bind(this, 'lower')} />
           <Button title='GREATER' onPress={nextGuessHandler.bind(this, 'greater')} />
-        </Card>
-      </View>
+        </View>
+      </Card>
     </View>
   );
 }
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 20,
     width: 300,
     maxWidth: '80%'
   }
