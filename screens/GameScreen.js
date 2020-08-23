@@ -9,6 +9,7 @@ import {
 import Card from './../components/Card';
 import NumberContainer from './../components/NumberContainer';
 import BodyText from './../components/BodyText';
+import MainButton from './../components/MainButton';
 
 import DefaultStyles from './../constants/default-styles';
 
@@ -68,8 +69,8 @@ const GameScreen = props => {
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <View style={styles.buttonContainer}>
-          <Button title='LOWER' onPress={nextGuessHandler.bind(this, 'lower')} />
-          <Button title='GREATER' onPress={nextGuessHandler.bind(this, 'greater')} />
+          <MainButton onPress={nextGuessHandler.bind(this, 'lower')}>LOWER</MainButton>
+          <MainButton onPress={nextGuessHandler.bind(this, 'greater')}>GREATER</MainButton>
         </View>
       </Card>
     </View>
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: 300,
-    maxWidth: '80%'
+    maxWidth: '90%'
   }
 });
 
