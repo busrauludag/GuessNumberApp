@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   Button,
   Alert
@@ -9,6 +8,9 @@ import {
 
 import Card from './../components/Card';
 import NumberContainer from './../components/NumberContainer';
+import BodyText from './../components/BodyText';
+
+import DefaultStyles from './../constants/default-styles';
 
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -62,7 +64,7 @@ const GameScreen = props => {
 
   return (
     <View style={styles.screen}>
-      <Text>Opponent's Guess</Text>
+      <BodyText style={DefaultStyles.title}>Opponent's Guess</BodyText>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <View style={styles.buttonContainer}>
