@@ -4,7 +4,8 @@ import {
   View,
   Alert,
   ScrollView,
-  FlatList
+  FlatList,
+  Dimensions
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -75,20 +76,27 @@ const GameScreen = props => {
     setPastGuesses(currPastGuesses => [nextNumber.toString(), ...currPastGuesses]);
   }
 
+  let listContainerStyle = styles.listContainer;
+  if (Dimensions.get('window').height < 350) {
+    listContainerStyle = styles.listContainerBig;
+  }
+
   return (
     <View style={styles.screen}>
       <BodyText style={DefaultStyles.title}>Opponent's Guess</BodyText>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <Card>
-        <View style={styles.buttonContainer}>
-          <MainButton onPress={nextGuessHandler.bind(this, 'lower')}>
-            <Ionicons name='md-remove' size={24} color={Colors.white} />
-          </MainButton>
-          <MainButton onPress={nextGuessHandler.bind(this, 'greater')}>
-            <Ionicons name='md-add' size={24} color={Colors.white} />
-          </MainButton>
-        </View>
-      </Card>
+      <View style={styles.buttonCardContainer}>
+        <Card>
+          <View style={styles.buttonContainer}>
+            <MainButton onPress={nextGuessHandler.bind(this, 'lower')}>
+              <Ionicons name='md-remove' size={24} color={Colors.white} />
+            </MainButton>
+            <MainButton onPress={nextGuessHandler.bind(this, 'greater')}>
+              <Ionicons name='md-add' size={24} color={Colors.white} />
+            </MainButton>
+          </View>
+        </Card>
+      </View>
       <View style={styles.listContainer}>
         {/* <ScrollView contentContainerStyle={styles.list}>
           {pastGuesses.map((index, guess) => renderListItem(pastGuesses.length - index, guess))}
@@ -100,7 +108,7 @@ const GameScreen = props => {
           contentContainerStyle={styles.list}
         />
       </View>
-    </View>
+    </View >
   );
 }
 
@@ -110,15 +118,26 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'center'
   },
+  buttonCardContainer: {
+    // marginTop: 20,
+    marginTop: Dimensions.get('window').height > 600 ? 20 : 10,
+    width: '80%',
+    minWidth: 300,
+    maxWidth: '90%'
+  },
   buttonContainer: {
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    width: 300,
-    maxWidth: '90%'
   },
   listContainer: {
     flex: 1,
     width: '60%',
+    marginVertical: 20
+  },
+  listContainerBig: {
+    flex: 1,
+    width: '80%',
     marginVertical: 20
   },
   list: {
