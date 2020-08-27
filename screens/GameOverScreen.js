@@ -3,7 +3,9 @@ import {
   StyleSheet,
   View,
   Text,
-  Image
+  Image,
+  Dimensions,
+  ScrollView
 } from 'react-native';
 
 import BodyText from './../components/BodyText';
@@ -14,29 +16,31 @@ import Colors from './../constants/colors';
 
 const GameOverScreen = props => {
   return (
-    <View style={styles.screen}>
-      <TitleText>The Game is Over!</TitleText>
-      <View style={styles.imageContainer}>
-        <Image
-          style={styles.image}
-          fadeDuration={500}
-          source={require('./../assets/success.png')}
-          // source={{uri: 'https://media.istockphoto.com/photos/female-hiker-celebrating-success-picture-id1137978889'}}
-          resizeMode='cover'
-        />
-      </View>
-      <View style={styles.resultContainer}>
-        <BodyText style={styles.resultText}>
-          Your phone needed{' '}
-          <Text style={styles.highlight}>{props.roundsNumber}</Text>
-          {' '}rounds to guess the number{' '}
-          <Text style={styles.highlight}>{props.userNumber}</Text>.
+    <ScrollView>
+      <View style={styles.screen}>
+        <TitleText>The Game is Over!</TitleText>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            fadeDuration={500}
+            source={require('./../assets/success.png')}
+            // source={{uri: 'https://media.istockphoto.com/photos/female-hiker-celebrating-success-picture-id1137978889'}}
+            resizeMode='cover'
+          />
+        </View>
+        <View style={styles.resultContainer}>
+          <BodyText style={styles.resultText}>
+            Your phone needed{' '}
+            <Text style={styles.highlight}>{props.roundsNumber}</Text>
+            {' '}rounds to guess the number{' '}
+            <Text style={styles.highlight}>{props.userNumber}</Text>.
         </BodyText>
-      </View>
-      <MainButton onPress={props.onRestart}>
-        NEW GAME
+        </View>
+        <MainButton onPress={props.onRestart}>
+          NEW GAME
       </MainButton>
-    </View>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -47,13 +51,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   imageContainer: {
-    width: 300,
-    height: 300,
-    borderRadius: 150,
+    width: Dimensions.get('window').width * 0.7,
+    height: Dimensions.get('window').width * 0.7,
+    borderRadius: Dimensions.get('window').width / 2,
     marginVertical: 15,
     borderWidth: 3,
     borderColor: Colors.black,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    marginVertical: Dimensions.get('window').height / 30
   },
   image: {
     width: '100%',
@@ -61,11 +66,11 @@ const styles = StyleSheet.create({
   },
   resultContainer: {
     width: '70%',
-    marginVertical: 10
+    marginVertical: Dimensions.get('window').height / 60
   },
   resultText: {
     textAlign: 'center',
-    fontSize: 20
+    fontSize: Dimensions.get('window').height < 400 ? 16 : 20
   },
   highlight: {
     color: Colors.headerBgColor,
